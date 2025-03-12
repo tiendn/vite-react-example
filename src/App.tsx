@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HelmetProvider } from "react-helmet-async";
+// import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 function UserPage() {
@@ -33,14 +33,14 @@ function UserPage() {
 
 function App() {
 	return (
-		<HelmetProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/user/:userId" element={<UserPage />} />
-					{/* Add more routes or fetch dynamically as needed */}
-				</Routes>
-			</BrowserRouter>
-		</HelmetProvider>
+		// <HelmetProvider>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/user/:userId" element={<UserPage />} />
+				{/* Add more routes or fetch dynamically as needed */}
+			</Routes>
+		</BrowserRouter>
+		// </HelmetProvider>
 	);
 }
 
