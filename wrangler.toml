@@ -1,0 +1,6 @@
+name = "svg-generator"
+main = "worker.js"
+compatibility_date = "2025-03-12"
+
+[vars]
+# Add any environment variables here if needed 
