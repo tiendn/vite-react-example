@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node server.js",
-		"build": "vite build && cp -r dist functions/",
+		"build": "vite build && vite build --ssr functions/[[path]].ts && cp -r dist functions/",
 		"preview": "vite preview",
 		"pages:dev": "npm run build && wrangler pages dev functions",
 		"pages:deploy": "npm run build && wrangler pages deploy functions"

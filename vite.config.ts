@@ -10,6 +10,9 @@ export default defineConfig({
 			input: {
 				app: "./index.html",
 			},
+			output: {
+				format: "es",
+			},
 		},
 		outDir: "dist",
 		emptyOutDir: true,
@@ -17,5 +20,18 @@ export default defineConfig({
 	ssr: {
 		target: "webworker",
 		noExternal: true,
+		format: "esm",
+	},
+	worker: {
+		format: "esm",
+	},
+	optimizeDeps: {
+		include: [
+			"react",
+			"react-dom",
+			"react-dom/server",
+			"react-router-dom",
+			"react-router-dom/server",
+		],
 	},
 });
