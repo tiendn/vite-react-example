@@ -1,4 +1,4 @@
-import * as ReactDOMServer from "react-dom/server";
+import * as ReactDOMServer from "react-dom/server.browser";
 import * as ReactRouterDOM from "react-router-dom/server";
 import * as React from "react";
 import App from "../src/App";
@@ -33,8 +33,9 @@ export async function onRequest(context: Context) {
 			React.createElement(App)
 		);
 
-		// Render the app
-		const appHtml = ReactDOMServer.renderToString(element);
+		// Render the app using renderToReadableStream
+		const stream = await ReactDOMServer.renderToReadableStream(element);
+		const appHtml = await new Response(stream).text();
 
 		// Insert the rendered app into the template
 		const finalHtml = html.replace("<!--ssr-outlet-->", appHtml);

@@ -20,16 +20,12 @@ export default defineConfig({
 	ssr: {
 		target: "webworker",
 		noExternal: true,
-		format: "esm",
-	},
-	worker: {
-		format: "esm",
 	},
 	optimizeDeps: {
 		include: [
 			"react",
 			"react-dom",
-			"react-dom/server",
+			"react-dom/server.browser",
 			"react-router-dom",
 			"react-router-dom/server",
 		],
