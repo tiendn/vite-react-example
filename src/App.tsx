@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 function UserPage() {
