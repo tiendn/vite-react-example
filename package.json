@@ -5,10 +5,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node server.js",
-		"build": "vite build",
+		"build": "vite build && cp -r dist functions/",
 		"preview": "vite preview",
-		"pages:dev": "wrangler pages dev dist",
-		"pages:deploy": "vite build && wrangler pages deploy dist"
+		"pages:dev": "npm run build && wrangler pages dev functions",
+		"pages:deploy": "npm run build && wrangler pages deploy functions"
 	},
 	"dependencies": {
 		"react": "^19.0.0",

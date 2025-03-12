@@ -3,14 +3,27 @@ import { StaticRouter } from "react-router-dom/server";
 import React from "react";
 import App from "../src/App";
 
-export async function onRequest(context: any) {
-	const { request } = context;
+interface Env {
+	ASSETS: {
+		fetch: (req: Request) => Promise<Response>;
+	};
+}
+
+interface Context {
+	request: Request;
+	env: Env;
+}
+
+export async function onRequest(context: Context) {
+	const { request, env } = context;
 	const url = new URL(request.url);
 
 	try {
 		// Read the index.html template
-		const html = await context.env.ASSETS.fetch(new Request("index.html")).then(
-			(res: Response) => res.text()
+		// Use the full URL to fetch the asset
+		const assetUrl = new URL("/index.html", url.origin);
+		const html = await env.ASSETS.fetch(new Request(assetUrl)).then((res: Response) =>
+			res.text()
 		);
 
 		// Create the React element
@@ -29,7 +42,12 @@ export async function onRequest(context: any) {
 		return new Response(finalHtml, {
 			headers: { "content-type": "text/html;charset=UTF-8" },
 		});
-	} catch (error: any) {
-		return new Response(`Error: ${error.message}`, { status: 500 });
+	} catch (error: unknown) {
+		console.error("SSR Error:", error);
+		const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+		return new Response(`Server Error: ${errorMessage}`, {
+			status: 500,
+			headers: { "content-type": "text/plain;charset=UTF-8" },
+		});
 	}
 }

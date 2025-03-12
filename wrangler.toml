@@ -7,4 +7,8 @@ compatibility_flags = ["nodejs_compat"]
 # Add any environment variables here if needed 
 
 [site]
-bucket = "./dist" 
+bucket = "./dist"
+
+[build]
+command = "npm run build"
+watch_dir = "src" 
