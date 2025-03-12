@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 // import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
@@ -8,6 +8,7 @@ function UserPage() {
 	const amount = "100"; // This could also come from props or API call if needed
 
 	const imageUrl = `https://svg-generator.tiendn-works.workers.dev/image?user=${userId}&amount=${amount}`;
+	const pageUrl = `/user/${userId}`;
 
 	return (
 		<div>
@@ -21,7 +22,7 @@ function UserPage() {
 					content={`This user has an amount of $${amount}.`}
 				/>
 				<meta property="og:image" content={imageUrl} />
-				<meta property="og:url" content={window.location.href} />
+				<meta property="og:url" content={pageUrl} />
 				<meta property="og:type" content="profile" />
 			</head>
 			<h1>User {userId}</h1>
@@ -34,12 +35,10 @@ function UserPage() {
 function App() {
 	return (
 		// <HelmetProvider>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/user/:userId" element={<UserPage />} />
-				{/* Add more routes or fetch dynamically as needed */}
-			</Routes>
-		</BrowserRouter>
+		<Routes>
+			<Route path="/user/:userId" element={<UserPage />} />
+			{/* Add more routes or fetch dynamically as needed */}
+		</Routes>
 		// </HelmetProvider>
 	);
 }

@@ -1,6 +1,10 @@
-name = "svg-generator"
+name = "vite-react-example"
 main = "worker.js"
-compatibility_date = "2025-03-12"
+compatibility_date = "2024-03-12"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 # Add any environment variables here if needed 
+
+[site]
+bucket = "./dist" 
