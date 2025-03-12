@@ -11,7 +11,7 @@ function UserPage() {
 
 	return (
 		<div>
-			<Helmet>
+			<head>
 				<title>
 					User {userId} - ${amount}
 				</title>
@@ -23,7 +23,7 @@ function UserPage() {
 				<meta property="og:image" content={imageUrl} />
 				<meta property="og:url" content={window.location.href} />
 				<meta property="og:type" content="profile" />
-			</Helmet>
+			</head>
 			<h1>User {userId}</h1>
 			<p>Amount: ${amount}</p>
 			<img src={imageUrl} alt={`User ${userId} amount`} />
