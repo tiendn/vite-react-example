@@ -19,7 +19,13 @@ export default defineConfig({
 	},
 	ssr: {
 		target: "webworker",
-		noExternal: true,
+		noExternal: [
+			"react",
+			"react-dom",
+			"react-dom/server",
+			"react-router-dom",
+			"react-router-dom/server",
+		],
 	},
 	optimizeDeps: {
 		include: [

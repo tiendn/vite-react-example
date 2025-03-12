@@ -1,6 +1,6 @@
-import { renderToString } from "react-dom/server.edge";
+import React from "react";
+import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { createElement } from "react";
 import App from "../src/App";
 
 interface Env {
@@ -26,10 +26,14 @@ export async function onRequest(context: Context) {
 		);
 
 		// Create the React element
-		const element = createElement(StaticRouter, { location: url.pathname }, createElement(App));
+		const element = React.createElement(
+			StaticRouter,
+			{ location: url.pathname },
+			React.createElement(App)
+		);
 
 		// Render the app
-		const appHtml = renderToString(element);
+		const appHtml = ReactDOMServer.renderToString(element);
 
 		// Insert the rendered app into the template
 		const finalHtml = html.replace("<!--ssr-outlet-->", appHtml);
