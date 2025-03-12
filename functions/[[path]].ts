@@ -1,6 +1,6 @@
-import * as ReactDOMServer from "react-dom/server.browser";
-import * as ReactRouterDOM from "react-router-dom/server";
-import * as React from "react";
+import { renderToString } from "react-dom/server.edge";
+import { StaticRouter } from "react-router-dom/server";
+import { createElement } from "react";
 import App from "../src/App";
 
 interface Env {
@@ -20,22 +20,16 @@ export async function onRequest(context: Context) {
 
 	try {
 		// Read the index.html template
-		// Use the full URL to fetch the asset
 		const assetUrl = new URL("/index.html", url.origin);
 		const html = await env.ASSETS.fetch(new Request(assetUrl)).then((res: Response) =>
 			res.text()
 		);
 
 		// Create the React element
-		const element = React.createElement(
-			ReactRouterDOM.StaticRouter,
-			{ location: url.pathname },
-			React.createElement(App)
-		);
+		const element = createElement(StaticRouter, { location: url.pathname }, createElement(App));
 
-		// Render the app using renderToReadableStream
-		const stream = await ReactDOMServer.renderToReadableStream(element);
-		const appHtml = await new Response(stream).text();
+		// Render the app
+		const appHtml = renderToString(element);
 
 		// Insert the rendered app into the template
 		const finalHtml = html.replace("<!--ssr-outlet-->", appHtml);

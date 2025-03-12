@@ -25,7 +25,7 @@ export default defineConfig({
 		include: [
 			"react",
 			"react-dom",
-			"react-dom/server.browser",
+			"react-dom/server.edge",
 			"react-router-dom",
 			"react-router-dom/server",
 		],

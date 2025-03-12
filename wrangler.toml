@@ -1,5 +1,4 @@
 name = "vite-react-example"
-main = "worker.js"
 compatibility_date = "2024-03-12"
 compatibility_flags = ["nodejs_compat"]
 
